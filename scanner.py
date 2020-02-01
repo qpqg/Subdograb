@@ -1,8 +1,13 @@
 from requests import session
 from os import path
+from datetime import datetime
 from pathlib import Path as folder
 q = session()
+display_logs = True
 
+def logs(text, s=display_logs):
+	waktu = datetime.now().strftime("%H:%M:%S")
+	stdout.writelines(f"[{waktu}] {text}") if(s) else None	
 def banner():
 	print("Simple SubDomain Scanner\nApi from: api.hackertarget.com")
 def real_path(file_name):
@@ -14,12 +19,14 @@ def files_save(myfile, text):
 	with open(real_path(myfile), "+a") as files:
 		files.writelines(f"{text}\n")
 def main(domain):
+        banner()
 	folder(real_path(f"/logs/{domain}/")).mkdir(parents=True, exist_ok=True)
 	for host in search(domain).split("\n"):
 		myhost = host.split(",")
 		files_save(f"/logs/{domain}/{domain}_host.txt", myhost[0])
 		files_save(f'/logs/{domain}/{domain}_ip.txt', myhost[1])
+		logs("{} > {}\r\n\r\n".format(myhost[0], myhost[1]))
+
 if __name__ == "__main__":
-	banner()
 	main(input("Host: "))
 #	main("facebook.com")
