@@ -10,7 +10,7 @@ def logs(text, s=display_logs):
 	waktu = datetime.now().strftime("%H:%M:%S")
 	stdout.writelines(f"[{waktu}] {text}") if(s) else None	
 def banner():
-	print("Simple SubDomain Scanner\nApi from: api.hackertarget.com")
+	print("Simple SubDomain Scanner\nBy Qiuby Zhukhu\nApi from: api.hackertarget.com\r\n\r\n")
 def real_path(file_name):
     return path.dirname(path.abspath(__file__)) + file_name
 def search(host):
